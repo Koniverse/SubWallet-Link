@@ -20,6 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "publish": "yarn gh-pages -d ./build -b gh-page",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
