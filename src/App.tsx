@@ -9,8 +9,8 @@ const isMobile = isIOS || isAndroid;
 const iOSLink = 'https://apps.apple.com/vn/app/subwallet-polkadot-wallet/id1633050285'
 const androidLink = 'https://play.google.com/store/apps/details?id=app.subwallet.mobile'
 
-const openLink = function(url: string) {
-    window.location.replace(url)
+const openLink = function (url: string) {
+  window.location.replace(url)
 }
 
 const transformUniversalToNativeDeepLink = function (url: string) {
@@ -18,16 +18,12 @@ const transformUniversalToNativeDeepLink = function (url: string) {
 }
 
 if (isMobile) {
-  if (isIOS) {
-    openLink(iOSLink)
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const mobileOpenUrl = urlSearchParams.get('url');
+  if (mobileOpenUrl) {
+    openLink(`subwallet://browser/?url=${encodeURIComponent(mobileOpenUrl)}`)
   } else {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const mobileOpenUrl = urlSearchParams.get('url');
-    if (mobileOpenUrl) {
-        openLink(`subwallet://browser/?url=${encodeURIComponent(mobileOpenUrl)}`)
-    } else {
-      openLink(transformUniversalToNativeDeepLink(window.location.href))
-    }
+    openLink(transformUniversalToNativeDeepLink(window.location.href))
   }
 }
 
